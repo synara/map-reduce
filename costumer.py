@@ -2,13 +2,12 @@ from mrjob.job import MRJob
 
 class MrCustomer(MRJob):
     def mapper(self, _, line):
-        customerID, productID, price = line.split(",")           
+        userId, _, price = line.split(",")           
         
-        yield customerID, float(price) 
+        yield userId, float(price) 
 
-    def reducer(self, customerID, values):
-        prices = list(values)
-        yield customerID, sum(prices) #/len(prices)
+    def reducer(self, userId, values):
+        yield userId, sum(values)
 
 
 
