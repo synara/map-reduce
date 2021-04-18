@@ -16,11 +16,10 @@ class MarvelGraph(MRJob):
         yield None, (sum(items), key)
 
     def reducer_2(self, key, values):
-        friends = sorted(list(values), reverse = True)
-        first = friends[0]
+        friends = sorted(list(values), reverse = True)[0]
 
-        yield int(first[1]), first[0]
-        
+        yield friends[0], friends[1]
+
     
     def steps(self):
         return [
